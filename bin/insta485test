@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# insta485run
+#
+# Clean, build and start server
+#
+# Andrew DeOrio <awdeorio@umich.edu>
+
+
+# Stop on errors, print commands
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Eeuo pipefail
+set -x
+
+# Unit Tests
+# Handcoded
+pytest -v tests/test_handcoded_*
+
+# Static Site p1
+pytest -v tests/test_insta485generator_public.py::test_hello
+pytest -v tests/test_insta485generator_public.py::test_hello_css
+# Static Site p2
+pytest -v tests/test_insta485generator_public.py
+pytest -v tests/test_template_*
+# pycodestyle
+pycodestyle insta485generator
+
+# pydocstyle 
+pydocstyle insta485generator
+
+# pylint
+pylint insta485generator
+
+# Clean
+rm -rf insta485/html
+
+# Build insta485/html dir
+insta485generator insta485
+
+# Validate html hand-coded html using html5validator
+html5validator --root html/
+
+# Validates generated html in insta485/html using html5validator
+html5validator --root insta485/html

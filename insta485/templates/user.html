@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>insta485</title></head>
+<body>
+    <div>
+        <a href="/">home</a>
+        <a href="/explore/">explore</a>
+        |
+        <a href="/users/{{ logname }}/">{{ logname }}</a>
+    </div>
+    <h1 class="username"> {{ username }}</h1>
+    <div class="stats">
+        {{ total_posts }} {%if total_posts == 1 %} post{% else %} posts{% endif %}
+        <b>
+            <a href="/users/{{ username }}/followers/" class="follower"> {{ followers }} {%if followers == 1 %} follower{% else %} followers{% endif %}</a>
+            <a href="/users/{{ username }}/following/" class="follow"> {{ following }} following</a>
+        </b>
+    </div>
+    <h2>{{ fullname }}</h2>
+    <div class="gallery">
+        {% for post in posts %}
+            <a href="/users/{{ username }}/{{ post.postid }}/">
+                <img src="{{ post.img_url }}" alt="">
+            </a>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

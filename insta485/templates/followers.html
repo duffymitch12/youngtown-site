@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>insta485</title>
+  </head>
+  <body>
+    <div>
+      <a href="/">home</a>
+      <a href="/explore/">explore</a>
+      |
+      <a href="/users/{{ logname }}/">{{ logname }}</a>
+    </div>
+    <h1>Followers</h1>
+    {% for follower in followers %}
+    <div>
+      <img src="{{ follower.user_img_url }}" alt="profile picture"/>
+      <a href="/users/{{ follower.username }}/">
+        <b>{{ follower.username }}</b>
+      </a>
+      {% if follower.logname_follows_username %} following {% elif logname ==
+      follower.username%} {% else %} not following{% endif %}
+    </div>
+    {% endfor %}
+  </body>
+</html>

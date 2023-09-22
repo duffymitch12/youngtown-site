@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=64.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "insta485generator"
+version = "1.0.0"
+dependencies = [
+    "bs4",
+    "click",
+    "html5validator",
+    "jinja2",
+    "pycodestyle",
+    "pydocstyle",
+    "pylint",
+    "pytest",
+    "requests"
+]
+requires-python = ">=3.10"
+
+[project.scripts]
+insta485generator = "insta485generator.__main__:main"
+
+[tool.setuptools]
+packages = ["insta485generator"]
+
+[tool.pylint.typecheck]
+# List of decorators that change the signature of a decorated function.
+# We need this because Click decorators mutate the main() function.
+signature-mutators = ["command", "option", "argument"]
